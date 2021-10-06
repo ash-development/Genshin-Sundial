@@ -7,10 +7,10 @@ authors = ["Chtholly2000 || https://github.com/Chtholly2000"]
 [tool.poetry.dependencies]
 python = "^3.8"
 colorama = "^0.4.4"
-"discord.py" = "1.7.3"
+py-cord = {git = "https://github.com/Pycord-Development/pycord.git"}
 Flask = "^2.0.1"
 pytz = "^2021.3"
-DiscordUtils = "^1.3.4"
+reactionmenu = {git = "https://github.com/Defxult/reactionmenu.git", branch = "3.0"}
 
 [tool.poetry.dev-dependencies]
 
