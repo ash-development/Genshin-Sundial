@@ -1,6 +1,7 @@
-# Function.py
+# ./Utils/Function.py
 # @author : Chtholly2000
 # @created : 2021-AUG-02 18:53
+# @last updated : 2021-OCT-06 19:00
 
 #Adds a comma to every 3rd digit
 def comma(num):
