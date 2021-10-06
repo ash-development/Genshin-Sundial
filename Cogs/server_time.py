@@ -5,7 +5,7 @@
 #Imports
 import pytz
 import discord
-import Function as function
+import Utils.Function as function
 
 from discord.ext import tasks, commands
 from datetime import datetime

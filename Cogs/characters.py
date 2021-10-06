@@ -5,6 +5,7 @@ import requests
 import DiscordUtils
 
 from discord.ext import commands
+from Utils.Function import Element
 
 class Characters(commands.Cog):
   def __init__(self,bot):
@@ -36,7 +37,7 @@ class Characters(commands.Cog):
     element = json_stats["vision"].lower()
 
     #Embed 1
-    embed1 = discord.Embed(title=f'__{name}__', description=desc, color=discord.Color.orange())
+    embed1 = discord.Embed(title=f'__{name}__', description=desc, color=Element(vision))
     embed1.set_thumbnail(url=f"https://api.genshin.dev/elements/{element}/icon")
     embed1.add_field(name='__Rarity__', value=f'{rarity}', inline=True)
     embed1.add_field(name='__Vision__', value=vision, inline=True)

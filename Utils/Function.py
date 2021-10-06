@@ -1,7 +1,7 @@
 # ./Utils/Function.py
 # @author : Chtholly2000
 # @created : 2021-AUG-02 18:53
-# @last updated : 2021-OCT-06 19:00
+# @last updated : 2021-OCT-06 19:39
 
 #Adds a comma to every 3rd digit
 def comma(num):
@@ -46,3 +46,13 @@ def sing_hour(hour):
 def sing_minute(Min):
   if Min == 1 : return 'minute'
   else : return 'minutes'
+
+#Gives Corresponding Elements hex code
+def Element(Vision):
+  if Vision == 'Anemo': return 0xa7f4cd
+  elif Vision == 'Geo': return 0xe8b53f
+  elif Vision == 'Electro': return 0xA74AC7
+  elif Vision == 'Dendro': return 0xb1ea2  
+  elif Vision == 'Hydro': return 0x08e4ff
+  elif Vision == 'Pyro': return 0xffa870
+  else: return 0x7fdbfa
