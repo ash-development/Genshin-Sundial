@@ -34,7 +34,8 @@ class Characters(commands.Cog):
     talent = json_stats["skillTalents"]
     passive = json_stats["passiveTalents"]
     element = json_stats["vision"].lower()
-    
+
+    #Embed 1
     embed1 = discord.Embed(title=f'__{name}__', description=desc, color=discord.Color.orange())
     embed1.set_thumbnail(url=f"https://api.genshin.dev/elements/{element}/icon")
     embed1.add_field(name='__Rarity__', value=f'{rarity}', inline=True)
@@ -46,20 +47,23 @@ class Characters(commands.Cog):
     embed1.add_field(name='__Birthday__', value=Birthday, inline=True)
     embed1.set_image(url=f"https://api.genshin.dev/characters/{character}/portrait")
     
-    embed2 = discord.Embed(title=name, description=f"{desc}\n**Constellation**", color=discord.Color.orange())
+    #Embed 2
+    embed2 = discord.Embed(title="__Constellations__", color=discord.Color.orange())
     embed2.set_thumbnail(url=f"https://api.genshin.dev/characters/{character}/icon")
     for constel in cons:
-      embed2.add_field(name="‎__Constellations__‎", value="```CSS\n[{}]\n{}```\n```{}```\n".format(constel['name'],constel['unlock'],constel['description']), inline=False)
-    
-    embed3 = discord.Embed(title=name, description=f"{desc}\n**Talents**", color=discord.Color.orange())
+      embed2.add_field(name="__                                                          __", value="```CSS\n[{}]\n{}```\n```\n{}\n```".format(constel['name'],constel['unlock'],constel['description']), inline=False)
+
+    #Embed 3
+    embed3 = discord.Embed(title="__Talents__", color=discord.Color.orange())
     embed3.set_thumbnail(url=f"https://api.genshin.dev/characters/{character}/icon")
     for skill in talent:
-      embed3.add_field(name="__‎Talents__‎", value="```FIX\n[{}]\n{}```\n```{}```\n".format(skill['name'],skill['unlock'],skill['description']), inline=False)
-    
-    embed4 = discord.Embed(title=name, description=f"{desc}\n**Passive**", color=discord.Color.orange())
+      embed3.add_field(name="__                                                          __", value="```FIX\n[{}]\n{}```\n```\n{}\n```\n".format(skill['name'],skill['unlock'],skill['description']), inline=False)
+
+    #Embed 4
+    embed4 = discord.Embed(title="__Passives__", color=discord.Color.orange())
     embed4.set_thumbnail(url=f"https://api.genshin.dev/characters/{character}/icon")
     for pasif in passive:
-      embed4.add_field(name="__‎Passives‎__", value="```FIX\n[{}]\n{}```\n```{}```\n".format(pasif['name'],pasif['unlock'],pasif['description']), inline=False)
+      embed4.add_field(name="__                                                          __", value="```FIX\n[{}]\n{}```\n```\n{}\n```\n".format(pasif['name'],pasif['unlock'],pasif['description']), inline=False)
     
     paginator = DiscordUtils.Pagination.CustomEmbedPaginator(ctx, remove_reactions=True)
     paginator.add_reaction('⏪', "back")
