@@ -36,15 +36,12 @@ class Characters(commands.Cog):
       cons = json_stats["constellations"]
       passive = json_stats["passiveTalents"]
       element = json_stats["vision"].lower()
-    
+
       talent = json_stats["skillTalents"]
-      #Normal Attack
       Normal_Name = talent[0]['name']
       Normal_Description = talent[0]['description']
-      #Elemental Skill
       Elemental_Name = talent[1]['name']
       Elemental_Description = talent[1]['description']
-      #Elemental Brust
       Brust_Name = talent[2]['name']
       Brust_Description = talent[2]['description']
 
@@ -58,7 +55,7 @@ class Characters(commands.Cog):
       embed1.add_field(name='__Affiliation__', value=affiliation, inline=True)
       embed1.add_field(name='__Constellation__', value=constellation, inline=True)
       embed1.add_field(name='__Birthday__', value=Birthday, inline=True)
-      embed1.set_image(url=f"https://api.genshin.dev/characters/{character}/portrait")
+      embed1.set_image(url=f"https://api.genshin.dev/characters/{character}/gacha-splash")
     
       #Embed 2 - Constellations
       embed2 = discord.Embed(title="__Constellations__", colour=Element(vision))
