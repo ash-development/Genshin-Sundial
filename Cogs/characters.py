@@ -1,16 +1,22 @@
+# ./Cogs/characters.py
+# @author : Chtholly2000
+# @created : 2021-OCT-07 01:12
+# @last updated : 2021-OCT-07 19:56
 
 #Imports
 import discord
 import requests
-import DiscordUtils
 
+from reactionmenu import ReactionMenu, ReactionButton
 from discord.ext import commands
 from Utils.Function import Element
 
+# ------------------------ COGS ------------------------ #
 class Characters(commands.Cog):
   def __init__(self,bot):
     self.bot=bot
-  
+# ------------------------------------------------------ # 
+    
   @commands.command(aliases=['chr'])
   async def character (self, ctx, *, character: str):
     character = character.replace("'", "-")
@@ -62,7 +68,8 @@ class Characters(commands.Cog):
       embed2.set_thumbnail(url=f"https://api.genshin.dev/characters/{character}/icon")
       for constel in cons:
         embed2.add_field(name="__                                                          __", value="```CSS\n[{}]\n{}```\n```\n{}\n```".format(constel['name'],constel['unlock'],constel['description']), inline=False)
-
+      embed2.set_image(url=f'https://api.genshin.dev/characters/{character}/constellation')
+      
       #Embed 3 - Talents 
       embed3 = discord.Embed(title="__Talents__", description=f'```FIX\n[{Normal_Name}]\nNormal Attack\n```\n```\n{Normal_Description}\n```\n```FIX\n[{Elemental_Name}]\nElemental Skill\n```\n```\n{Elemental_Description}\n```\n```FIX\n[{Brust_Name}]\nElemental Brust\n```\n```\n{Brust_Description}\n```', colour = Element(vision))
       embed3.set_thumbnail(url=f"https://api.genshin.dev/characters/{character}/icon")
@@ -73,26 +80,34 @@ class Characters(commands.Cog):
       for pasif in passive:
         embed4.add_field(name="__                                                          __", value="```FIX\n[{}]\n{}```\n```\n{}\n```\n".format(pasif['name'],pasif['unlock'],pasif['description']), inline=False)
 
-      #Paginator
-      paginator = DiscordUtils.Pagination.CustomEmbedPaginator(ctx, remove_reactions=True)
-      paginator.add_reaction('⏪', "back")
-      paginator.add_reaction('⏩', "next")
-      embeds = [embed1, embed2, embed3, embed4]
-      await paginator.run(embeds)  
+      #Paginator Menu
+      menu = ReactionMenu(ctx, menu_type=ReactionMenu.TypeEmbed)
 
+      #Add Buttons
+      menu.add_button(ReactionButton.back())
+      menu.add_button(ReactionButton.next())
+      menu.add_button(ReactionButton(emoji='❌', linked_to=ReactionButton.Type.END_SESSION))
+      #Add Pages
+      menu.add_page(embed1)
+      menu.add_page(embed2)
+      menu.add_page(embed3)
+      menu.add_page(embed4)
+      #Starts Menu
+      await menu.start()
     else: 
       await ctx.send(f"```\n{json_stats['error']}\n```")  
   
-  @commands.command(aliases=['charalist'])   
-  async def characters(self, ctx):
+  @commands.command(aliases=['chrlist'])   
+  async def characterlist(self, ctx):
     url = f"https://api.genshin.dev/characters"
     stats = requests.get(url)
     charas = stats.json()
-    embed = discord.Embed(title="Character list", description="```"+"\n".join(charas)+"```", color=discord.Color.orange())
-    embed.set_footer(text="use `+character <chara name>`")
-    
-    await ctx.author.send(embed=embed)
-    await ctx.send("I sent you the character list on your DM!")
-    
+    embed = discord.Embed(title="__Character List__", description="```"+"\n".join(charas)+"\n```", color=discord.Color.blue()).set_image(url="https://wallpaperboat.com/wp-content/uploads/2020/10/07/56141/genshin-impact-04.jpg")
+    try:
+      await ctx.author.send(embed=embed)
+    except:
+      await ctx.send(f"I can't DM you the character list, as you have closed it for {ctx.guild}!")
+      
+# -------------------------- BOT ------------------------ #    
 def setup(bot):
   bot.add_cog(Characters(bot))
