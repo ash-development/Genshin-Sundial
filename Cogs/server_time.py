@@ -1,10 +1,12 @@
 # ./Cogs/server_time.py
 # @author : Chtholly2000
 # @created : 2021-OCT-05 20:29
+# @last updated : 2021-OCT-24 05:07
 
 #Imports
 import pytz
 import discord
+import json
 import Utils.Function as function
 
 from discord.ext import tasks, commands
@@ -14,10 +16,6 @@ from datetime import datetime
 america = pytz.timezone('America/Cancun')
 asia = pytz.timezone('Asia/Irkutsk')
 europe = pytz.timezone('Africa/Algiers')
-
-CHANNEL_ID = 894506483386023986
-MESSAGE_ID = 894506647936958464
-GUILD_ID = 892426909521166376
 
 # ------------------------ COGS ------------------------ #
 class ServerTime(commands.Cog):
@@ -31,6 +29,12 @@ class ServerTime(commands.Cog):
 
 	@tasks.loop(seconds=5.0)
 	async def server_time(self):
+    
+    with open("config.json", "r") as config:
+      data = json.load(config)
+      CHANNEL_ID = data["CHANNEL_ID"]
+      MESSAGE_ID = data["MESSAGE_ID"]
+      GUILD_ID = data["GUILD_ID"]
 
 		# --------------- AMERICAN SERVER -------------------- #
 		America = (datetime.now(america).strftime("%H:%w:%M"))

@@ -61,7 +61,7 @@ class Characters(commands.Cog):
       embed1.add_field(name='__Affiliation__', value=affiliation, inline=True)
       embed1.add_field(name='__Constellation__', value=constellation, inline=True)
       embed1.add_field(name='__Birthday__', value=Birthday, inline=True)
-      embed1.set_image(url=f"https://api.genshin.dev/characters/{character}/gacha-splash")
+      embed1.set_image(url=f"https://api.genshin.dev/characters/{character}/card")
     
       #Embed 2 - Constellations
       embed2 = discord.Embed(title="__Constellations__", colour=Element(vision))
