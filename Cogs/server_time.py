@@ -4,16 +4,16 @@
 # @last updated : 2021-OCT-24 06:07
 
 #Imports
-import pytz
 import discord
 import json
+import pytz
 import Utils.Function as function
 
+from datetime import datetime
 from discord.ext import tasks, commands
 from discord.ext.commands import is_owner
-from datetime import datetime
 
-#Timezones
+# ---------------------- TIMEZONES --------------------- #
 america = pytz.timezone('America/Cancun')
 asia = pytz.timezone('Asia/Irkutsk')
 europe = pytz.timezone('Africa/Algiers')
@@ -22,10 +22,12 @@ europe = pytz.timezone('Africa/Algiers')
 class ServerTime(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
+    self.server_time.start()
   
   def cog_unload(self):
     self.server_time.cancel()
 # ------------------------------------------------------ #
+    
   @tasks.loop(seconds=5.0)
   async def server_time(self):
     
@@ -92,15 +94,17 @@ class ServerTime(commands.Cog):
     users = function.comma(u)
 
     #Discord Embed
-    embed = discord.Embed(description=f"**Server Status**\n\nMembers : {users}\n\n**Server Time:**\n```md\n# NA {America_time}\n```•Daily reset in {Am_hour_left} and {Am_minute_left}\n•Weekly reset in {Am_day_left}, {Am_hour_left} and {Am_minute_left}\n```\n# EU {Europe_time}\n```•Daily reset in {Eu_hour_left} and {Eu_minute_left}\n•Weekly reset in {Eu_day_left}, {Eu_hour_left} and {Eu_minute_left}\n```cs\n# Asia {Asia_time}\n```•Daily reset in {As_hour_left} and {As_minute_left}\n•Weekly reset in {As_day_left}, {As_hour_left} and {As_minute_left}\n```fix\n# SAR {Asia_time}\n```•Daily reset in {As_hour_left} and {As_minute_left}\n•Weekly reset in {As_day_left}, {As_hour_left}  and {As_minute_left}", colour=0x738ADB)
+    embed = discord.Embed(description=f"**Server Status**\n\nMembers : {users}\n\n**Server Time:**\n```md\n# NA {America_time}\n```•Daily reset in {Am_hour_left} and {Am_minute_left}\n•Weekly reset in {Am_day_left}, {Am_hour_left} and {Am_minute_left}\n```\n# EU {Europe_time}\n```•Daily reset in {Eu_hour_left} and {Eu_minute_left}\n•Weekly reset in {Eu_day_left}, {Eu_hour_left} and {Eu_minute_left}\n```cs\n# Asia {Asia_time}\n```•Daily reset in {As_hour_left} and {As_minute_left}\n•Weekly reset in {As_day_left}, {As_hour_left} and {As_minute_left}\n```fix\n# SAR {Asia_time}\n```•Daily reset in {As_hour_left} and {As_minute_left}\n•Weekly reset in {As_day_left}, {As_hour_left}  and {As_minute_left}\n\n[`Source Code`](https://github.com/Chtholly2000/Barbara)", colour=0x738ADB)
     embed.set_image(url="https://i.postimg.cc/kGYzvFx5/1148533.jpg")
     embed.set_footer(text="GENSHIN SERVER TIME")
 
-    
-    channel = self.bot.get_channel(CHANNEL_ID)
-    message = await channel.fetch_message(MESSAGE_ID)
-    await message.edit(embed=embed)
-    
+    try:
+      channel = self.bot.get_channel(CHANNEL_ID)
+      message = await channel.fetch_message(MESSAGE_ID)
+      await message.edit(embed=embed)
+    except:
+      self.server_time.cancel()
+      
   @server_time.before_loop
   async def before_server_time(self):
     await self.bot.wait_until_ready()
@@ -112,15 +116,15 @@ class ServerTime(commands.Cog):
       channel = self.bot.get_channel(data['CHANNEL_ID'])
       message = await channel.fetch_message(data['MESSAGE_ID'])
     except:
-      await server_time.cancel()
+      self.server_time.cancel()
 
   @commands.command()
   @is_owner()
   @commands.guild_only()
-  async def time(self,ctx):
+  async def servertime(self,ctx):
   
     await ctx.message.delete()
-    message = await ctx.send(embed=discord.Embed(title='TIME'))
+    message = await ctx.send(embed=discord.Embed(title='__SERVER TIME__', description = '📌 If Embed is not editing itself, please open an issue [`here`](https://github.com/Chtholly2000/Barbara/issues)'))
 
     with open("config.json", "r") as config:
       data = json.load(config)
@@ -134,6 +138,7 @@ class ServerTime(commands.Cog):
       config.write(newdata)
     
     await self.server_time.start()
+    
 # ------------------------ BOT ------------------------ #
 def setup(bot):
   bot.add_cog(ServerTime(bot))
