@@ -1,7 +1,7 @@
 # ./Cogs/server_time.py
 # @author : Chtholly2000
 # @created : 2021-OCT-05 20:29
-# @last updated : 2021-OCT-24 05:07
+# @last updated : 2021-OCT-24 06:07
 
 #Imports
 import pytz
@@ -30,11 +30,11 @@ class ServerTime(commands.Cog):
 	@tasks.loop(seconds=5.0)
 	async def server_time(self):
     
-          with open("config.json", "r") as config:
-            data = json.load(config)
-            CHANNEL_ID = data["CHANNEL_ID"]
-            MESSAGE_ID = data["MESSAGE_ID"]
-            GUILD_ID = data["GUILD_ID"]
+    with open("config.json", "r") as config:
+      data = json.load(config)
+      CHANNEL_ID = data["CHANNEL_ID"]
+      MESSAGE_ID = data["MESSAGE_ID"]
+      GUILD_ID = data["GUILD_ID"]
 
 	  # --------------- AMERICAN SERVER -------------------- #
 	  America = (datetime.now(america).strftime("%H:%w:%M"))
@@ -68,7 +68,7 @@ class ServerTime(commands.Cog):
 	  #Minutes left
 	  Eu_minute = int(Europe.split(':')[1])
 	  Eu_minute_left_int = function.minute(Eu_minute)
-          Eu_minute_left = str(Eu_minute_left_int) + " " + function.sing_minute(Eu_minute_left_int)
+    Eu_minute_left = str(Eu_minute_left_int) + " " + function.sing_minute(Eu_minute_left_int)
 
 	  #Days left
 	  Eu_day = int(Europe.split(':')[2])
@@ -96,7 +96,7 @@ class ServerTime(commands.Cog):
 	  As_day_left_int = function.week(7 - As_day)
 	  As_day_left = str(As_day_left_int) + " " + function.sing_day(As_day_left_int)
 
-          #Time Now
+    #Time Now
 	  Asia_time = (datetime.now(asia).strftime("%I:%M %p | %A"))
 
 	  #No of users in Guild
@@ -110,7 +110,7 @@ class ServerTime(commands.Cog):
 
 	  channel = self.bot.get_channel(CHANNEL_ID)
 	  message = await channel.fetch_message(MESSAGE_ID)
-          await message.edit(embed=embed)
+    await message.edit(embed=embed)
 
 	@server_time.before_loop
 	async def before_server_time(self):
