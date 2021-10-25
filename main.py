@@ -27,6 +27,7 @@ bot.remove_command("help")
 @bot.event
 async def on_ready():
   print(Fore.GREEN + f'Successfully logged in as {bot.user}')
+  await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name =f"{prefix}help"))
 
 @bot.event
 async def on_command_error(ctx,error):
