@@ -1,0 +1,12 @@
+{
+    "name": "Genshin-Sundial",
+    "description": "Display current time of different Genshin Impact Servers in Rich Embeds",
+    "repository": "https://github.com/Chtholly2000/Genshin-Sundial",
+    "logo": "https://i.postimg.cc/MGjSWLxK/IMG-20210929-041418.jpg",
+    "env": {
+        "token": {
+            "description": "Your discord bot's token.",
+            "required": true
+        }
+    }
+}
