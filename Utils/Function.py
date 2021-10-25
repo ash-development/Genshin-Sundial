@@ -45,14 +45,4 @@ def sing_hour(hour):
 #Singular Minute Function
 def sing_minute(Min):
   if Min == 1 : return 'minute'
-  else : return 'minutes'
-
-#Gives Corresponding Elements hex code
-def Element(Vision):
-  if Vision == 'Anemo': return 0xa7f4cd
-  elif Vision == 'Geo': return 0xe8b53f
-  elif Vision == 'Electro': return 0xA74AC7
-  elif Vision == 'Dendro': return 0xb1ea2  
-  elif Vision == 'Hydro': return 0x08e4ff
-  elif Vision == 'Pyro': return 0xffa870
-  else: return 0x7fdbfa
+  else : return 'minutes' 
