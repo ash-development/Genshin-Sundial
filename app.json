@@ -7,6 +7,10 @@
         "token": {
             "description": "Your discord bot's token.",
             "required": true
+        },
+        "prefix": {
+            "description": "the prefix for the bot's commands.",
+            "required": true
         }
     }
 }
