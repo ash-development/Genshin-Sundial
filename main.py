@@ -46,9 +46,6 @@ for filename in os.listdir("./Cogs"):
     print(Fore.BLUE+f"Successfully Loaded {filename}")
 
 # -------------------------- RUN -------------------------- #
-try:
-  keep_alive()
-  token = os.getenv('token')
-  bot.run(token)
-except:
-  print(Fore.RED+'Add token as Environmental Variable')
+keep_alive()
+token = os.getenv('token')
+bot.run(token)
