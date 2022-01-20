@@ -15,6 +15,7 @@ Click the buttons at the top of readme
 #### Install it yourself!
 
 Make sure python is installed
+
 Mac/Linux:
 ```cmd
 python3 -m pip --version
@@ -27,6 +28,7 @@ py -m pip --version
 On Windows & Linux, simply copy `.env.example` to `.env` and add your token in, for Mac simply run `export token=abc` and replace "abc" with your actual token.
 
 Then run:
+
 Mac/Linux:
 ```cmd
 python3 -m pip install flask pytz colorama discord.py
@@ -37,6 +39,7 @@ py -m pip install flask pytz colorama discord.py
 ```
 
 Then to start up the bot do:
+
 Mac/Linux:
 ```cmd
 python3 main.py
